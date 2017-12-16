@@ -20,11 +20,9 @@
 
 3.Known issues
 
-    The test scenario "every component has at least analytics data" fails, as this condition is not fulfilled for all
-    components in the API
+    The test scenario "every component has at least analytics data" fails, as this condition is not fulfilled for all components in the API
 
 4.Compatibility
 
-    The framework has been tested in LINUX, WINDOWS10 and CHROME 56.0.2924.87 with 64 bits linux chromedriver 28.0 
-    and 32 bits Windows chromedriver 34.0 / FIREFOX 49.0
+    The framework has been tested in LINUX, WINDOWS10 and CHROME 56.0.2924.87 with 64 bits linux chromedriver 28.0 and 32 bits Windows chromedriver 34.0 / FIREFOX 49.0
 
