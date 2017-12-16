@@ -20,8 +20,9 @@ import static org.hamcrest.Matchers.lessThan;
 public class AdidasAPIModel {
 
     public JSONObject api;
+    public long performance;
 
-    public void getAdidasAPIModel() throws IOException {
+    public int getAdidasAPIModel() throws IOException {
         HttpClient client = new HttpClient();
         Date date = new Date();
         long timestamp1 = date.getTime();
@@ -30,10 +31,12 @@ public class AdidasAPIModel {
         long timestamp2 = date.getTime();
         assertThat("response is OK", response.code(), Matchers.is(200));
 
-        assertThat("response under 1 sec", timestamp2 - timestamp1, lessThan(new Long(1000)));
+
         String sresponse = response.body();
         System.out.println("RESPONSE " + sresponse);
         api = new JSONObject(sresponse);
+        performance=timestamp2-timestamp1;
+        return response.code();
 
 
     }

@@ -15,6 +15,9 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.Matchers.lessThan;
+import static org.hamcrest.core.Is.is;
 
 /**
  * Created by dmontero
@@ -27,13 +30,16 @@ public class StepDefAdidasAPI extends StepDefBase {
     @Given("^I get the API response under 1 sec$")
     public void iGetTheAPIResponse() throws Throwable {
         model = new AdidasAPIModel();
-        model.getAdidasAPIModel();
+        int response=model.getAdidasAPIModel();
+        assertThat("response from api is ok", response, is(200));
+        assertThat("response under 1 sec", model.performance, lessThan(new Long(1000)));
         assert model.api != null;
     }
 
     @When("^I get all the components list$")
     public void iGetAllTheComponentsList() throws Throwable {
         components = model.api.getJSONArray("component_presentations");
+        assertThat ("There are components in the api",components.length(),greaterThan(0));
 
     }
 
