@@ -14,7 +14,11 @@ Feature: UI-Tests For the adidas homepage
 
     Examples:
       | locale |  | link      |  | page      |
-      | en_GB  |  | Men       |  | men       |
+      | fi_FI  |  | Men       |  | men       |
       | fi_FI  |  | Women     |  | women     |
       | fi_FI  |  | Kids      |  | kids      |
+      | fi_FI  |  | Customise |  | customise |
+      | en_GB  |  | Men       |  | men       |
+      | en_GB  |  | Women     |  | women     |
+      | en_GB  |  | Kids      |  | kids      |
       | en_GB  |  | Customise |  | customise |
