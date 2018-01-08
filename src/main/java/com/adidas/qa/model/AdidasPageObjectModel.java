@@ -20,29 +20,20 @@ public class AdidasPageObjectModel {
     public String title;
 
 
-    public AdidasPageObjectModel(){
-        switch(System.getProperty("browser")+""){
+    public AdidasPageObjectModel() {
+        switch (System.getProperty("browser") + "") {
 
             case "FF":
                 FirefoxProfile profile = new FirefoxProfile();
 
-                profile.setPreference("intl.accept_languages","en");
-                driver=new FirefoxDriver();
+                profile.setPreference("intl.accept_languages", "en");
+                driver = new FirefoxDriver();
                 break;
             case "chrome":
-                ChromeOptions options = new ChromeOptions();
-
-                options.addArguments("–lang= en");
-                System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"/src/test/resources/chromedriver"
-                        +(System.getProperty("os.name").toLowerCase().contains("windows")?".exe":""));
-                driver=new ChromeDriver();
+                initChrome();
                 break;
             default:
-                ChromeOptions optionsdef = new ChromeOptions();
-                optionsdef.addArguments("–lang= en");
-                System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+"/src/test/resources/chromedriver"
-                        +(System.getProperty("os.name").toLowerCase().contains("windows")?".exe":""));
-                driver=new ChromeDriver();
+                initChrome();
                 break;
 
         }
@@ -53,25 +44,25 @@ public class AdidasPageObjectModel {
         driver.findElement(By.cssSelector("#truste-consent-button > img")).click();
 
 
-        title=driver.getTitle();
+        title = driver.getTitle();
 
     }
 
-    public void selectLanguageLocator(String language){
-        driver.findElement(By.cssSelector(TestProperties.language_locator.replace("#lang",language))).click();
+    public void selectLanguageLocator(String language) {
+        driver.findElement(By.cssSelector(TestProperties.language_locator.replace("#lang", language))).click();
     }
 
-    public void quit(){
+    public void quit() {
         driver.manage().deleteCookieNamed("adidas.fi");
         driver.manage().deleteCookieNamed("adidas.co.uk");
         driver.quit();
     }
 
-    public void clickMenLocator(){
+    public void clickMenLocator() {
         driver.findElement(By.cssSelector(TestProperties.men_locator)).click();
     }
 
-    public String getLocation(){
+    public String getLocation() {
         return driver.getCurrentUrl();
     }
 
@@ -85,5 +76,23 @@ public class AdidasPageObjectModel {
 
     public void clickCustomiseLocator() {
         driver.findElement(By.cssSelector(TestProperties.customise_locator)).click();
+    }
+
+    private void initChrome() {
+
+        ChromeOptions options = new ChromeOptions();
+
+        options.addArguments("–lang= en");
+
+        String chromedriver;
+        if (System.getProperty("os.name").toLowerCase().contains("windows"))
+            chromedriver = "win/chromedriver.exe";
+        else if (System.getProperty("os.name").toLowerCase().contains("mac"))
+            chromedriver = "mac/chromedriver";
+        else chromedriver = "linux/chromedriver";
+
+        System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/test/resources/"+chromedriver);
+        driver = new ChromeDriver();
+
     }
 }
